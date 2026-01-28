@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # 1. The Database (Postgres)
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ai_chat_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # 2. Your AI Brain (Python)
+  ai-engine:
+    build: ./ai-engine
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ai-engine:/app
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY} 
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
