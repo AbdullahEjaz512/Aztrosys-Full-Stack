@@ -1,0 +1,12 @@
+# Ignore dependencies
+node_modules/
+
+# Ignore builds
+.next/
+build/
+dist/
+
+# Ignore env files
+.env
+.env.local
+.DS_Store
